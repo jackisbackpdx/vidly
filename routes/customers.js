@@ -1,26 +1,6 @@
-const mongoose = require('mongoose');
+const { Customer, validate } = require('../models/customer');
 const express = require('express');
 const router = express.Router();
-const Joi = require('@hapi/Joi');
-
-const Customer = mongoose.model('Customer', new mongoose.Schema({
-    isGold: {
-        required: true,
-        type: Boolean,
-    },
-    name: {
-        type: String,
-        minlength: 5,
-        maxlength: 20,
-        required: true,
-    },
-    phone: {
-        type: String,
-        minlength: 10,
-        maxlength: 20,
-        required: true
-    }
-}));
 
 router.get('/', async(req, res) => {
     const customers = await Customer.find().sort('name');
@@ -28,9 +8,43 @@ router.get('/', async(req, res) => {
 });
 
 router.post('/', async(req, res) => {
-    const customer = new Customer(req.body);
-    const result = await customer.save();
-    res.send(result);
+    const { error } = validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
+    let customer = new Customer(req.body);
+    customer = await customer.save();
+    res.send(customer);
+});
+
+router.put('/:id', async(req, res) => {
+    const { error } = validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
+    const customer = await Customer.findByIdAndUpdate(req.params.id, { 
+        isGold: req.body.isGold,
+        name: req.body.name,
+        phone: req.body.phone
+    }, { new: true });
+
+    if (!customer) return res.status(404).send('No customer with the matching id was found');
+
+    res.send(customer);
+});
+
+router.delete('/:id', async(req, res) => {
+    const customer = await Customer.findByIdAndRemove(req.params.id);
+
+    if (!customer) return res.status(404).send('No customer with the matching id was found');
+
+    res.send(customer);
+});
+
+router.get('/:id', async(req, res) => {
+    const customer = await Customer.findById(req.params.id);
+
+    if (!customer) return res.status(404).send('No customer with the matching id was found');
+
+    res.send(customer);
 });
 
 module.exports = router;
