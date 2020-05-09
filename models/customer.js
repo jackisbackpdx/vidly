@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Joi = require('@hapi/joi');
 
-const Customer = mongoose.model('Customer', new mongoose.Schema({
+const customerSchema = new mongoose.Schema({
     isGold: {
         required: true,
         type: Boolean,
@@ -18,7 +18,9 @@ const Customer = mongoose.model('Customer', new mongoose.Schema({
         maxlength: 10,
         required: true
     }
-}));
+});
+
+const Customer = mongoose.model('Customer', );
 
 function validateCustomers(customer) {
     const joi = Joi.object({
@@ -32,3 +34,4 @@ function validateCustomers(customer) {
 
 exports.Customer = Customer;
 exports.validate = validateCustomers;
+exports.customerSchema = customerSchema;
