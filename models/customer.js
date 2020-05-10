@@ -20,7 +20,7 @@ const customerSchema = new mongoose.Schema({
     }
 });
 
-const Customer = mongoose.model('Customer', );
+const Customer = mongoose.model('Customer', customerSchema);
 
 function validateCustomers(customer) {
     const joi = Joi.object({
