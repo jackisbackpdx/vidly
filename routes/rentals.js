@@ -64,7 +64,7 @@ router.put('/:id', async(req, res) => {
     const customer = await Customer.findById(req.body.customerId);
     if (!customer) return res.status(400).send('Invalid Customer');
 
-    const rental = new Rental({ 
+    const rental = Rental.findByIdAndUpdate(req.params.id, { 
         movie: {
             _id: movie._id,
             title: movie.title,
