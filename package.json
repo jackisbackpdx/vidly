@@ -1,0 +1,40 @@
+{
+  "name": "vidly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcrypt": "^4.0.1",
+    "config": "^3.3.1",
+    "eslint-config-node": "^4.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "express": "^4.17.1",
+    "fawn": "^2.1.5",
+    "gitignore": "^0.6.0",
+    "joi-objectid": "^3.0.1",
+    "joi-password-complexity": "^4.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.9.12",
+    "prettier": "^2.0.5"
+  },
+  "devDependencies": {
+    "eslint": "^7.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackisbackpdx/vidly.git"
+  },
+  "author": "Jackson Kelley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jackisbackpdx/vidly/issues"
+  },
+  "homepage": "https://github.com/jackisbackpdx/vidly#readme"
+}
