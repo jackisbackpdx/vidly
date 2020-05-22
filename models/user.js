@@ -59,3 +59,4 @@ const complexity = passwordComplexity(complexityOptions)
 exports.complexity = complexity;
 exports.User = User;
 exports.validate = validateUser;
+exports.userSchema = userSchema
