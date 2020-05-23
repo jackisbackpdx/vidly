@@ -8,4 +8,6 @@ require('./startup/db')();
 require('./startup/config')();
 require('./startup/validation')();
 
-app.listen(2000, () => winston.info('Listening on port 2000'));
+const server = app.listen(2000, () => winston.info('Listening on port 2000'));
+
+module.exports = server;
