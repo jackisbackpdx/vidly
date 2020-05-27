@@ -26,11 +26,11 @@
   },
   "devDependencies": {
     "eslint": "^7.0.0",
-    "jest": "^26.0.1",
+    "jest": "^25.5.4",
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "test": "jest --watchAll --verbose --runInBand --coverage"
+    "test": "jest --watchAll --runInBand"
   },
   "repository": {
     "type": "git",

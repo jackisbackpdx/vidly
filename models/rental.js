@@ -43,9 +43,9 @@ const Rental = new mongoose.model('Rental', new mongoose.Schema({
     dateReturned: {
         type: Date
     },
-    rentalFee: {
+    dailyRentalRate: {
         type: Number,
-        min: 0
+        min: 0,
     }
 }));
 

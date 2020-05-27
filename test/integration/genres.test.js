@@ -5,8 +5,10 @@ const mongoose = require('mongoose');
 
 let server;
 
+
 describe('/api/genres', () => {
     beforeEach(() => { server = require('../../index')})
+
     afterEach(async () => { 
         server.close();
         await Genre.remove({});
@@ -58,7 +60,7 @@ describe('/api/genres', () => {
         
         const exec = async () => {
             return await request(server)
-            .post('/api/genres')
+            .post('/api/genres/')
             .set('x-auth-token', token)
             .send({ name });
         }
@@ -176,8 +178,8 @@ describe('/api/genres', () => {
         let id;
     
         const exec = async() => {
-            return await request(server)
-                .delete('api/genres/' + id)
+            return request(server)
+                .delete('/api/genres/' + id)
                 .set('x-auth-token', token)
                 .send();
         }
@@ -187,7 +189,7 @@ describe('/api/genres', () => {
             await genre.save();
 
             id = genre._id;
-            token = new User({isAdmin: true}).generateAuthToken();
+            token = new User({ isAdmin: true }).generateAuthToken();
         })
         it('should return 401 if client is not logged in', async() => {
             token = '';
@@ -202,6 +204,21 @@ describe('/api/genres', () => {
             const res = await exec();
 
             expect(res.status).toBe(403);
+        })
+        it('should return 404 if given an invalid id', async() => {
+            token = new User({isAdmin: true}).generateAuthToken();
+            id = 1;
+
+            const res = await exec();
+
+            expect(res.status).toBe(404);
+        })
+        it('should return 200 if given a valid id and the user is an admin and send the client the deleted movie', async () => {
+            const res = await exec();
+
+            expect(res.status).toBe(200);
+            expect(res.body).toHaveProperty('_id');
+            expect(res.body).toHaveProperty('name');
         })
     })
 })

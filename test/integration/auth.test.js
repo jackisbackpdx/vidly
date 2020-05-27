@@ -1,15 +1,15 @@
 const { User } = require('../../models/user');
 const { Genre } = require('../../models/genre')
 const request = require('supertest');
-let server;
 
+let server;
 
 describe('auth middleware', () => {
     beforeEach(() => { server = require('../../index')})
     afterEach(async () => {
         server.close();
         await Genre.remove({})
-    });
+    })
 
     let token;
 

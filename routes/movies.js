@@ -55,7 +55,7 @@ router.put('/:id', auth, async(req, res) => {
             name: genre.name
         },
         numberInStock: req.body.numberInStock,
-        dailyRentalRate: req.body.dailyRentalRate
+        rentalFee: req.body.rentalFee
     }, {
         new: true
     });
