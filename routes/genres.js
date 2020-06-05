@@ -1,3 +1,4 @@
+const validator = require('../middleware/validate');
 const validateObjectId = require('../middleware/validateObjectId')
 const admin = require('../middleware/admin');
 const auth = require('../middleware/auth');
@@ -10,20 +11,13 @@ router.get('/', async (req, res) => {
     res.send(genres);
 });
 
-router.post('/', auth, async(req, res) => {
-
-    const { error } = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
-
+router.post('/', [auth, validator(validate)], async(req, res) => {
     const genre = new Genre({ name: req.body.name });
     await genre.save();
     res.send(genre);
 });
 
-router.put('/:id', auth, async(req, res) => {
-    const { error } = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
-
+router.put('/:id', [auth, validator(validate)], async(req, res) => {
     const genre = await Genre.findByIdAndUpdate(req.params.id, { name: req.body.name }, {
         new: true
     });

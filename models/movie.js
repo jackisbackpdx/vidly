@@ -20,7 +20,7 @@ const movieSchema = new mongoose.Schema({
         min: 0, 
         max: 255
     },
-    rentalFee: {
+    dailyRentalRate: {
         type: Number,
         min: 0,
         max: 255,

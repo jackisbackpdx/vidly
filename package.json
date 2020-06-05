@@ -6,6 +6,7 @@
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "bcrypt": "^4.0.1",
+    "compression": "^1.7.4",
     "config": "^3.3.1",
     "eslint-config-node": "^4.0.0",
     "eslint-config-prettier": "^6.11.0",
@@ -15,10 +16,12 @@
     "express-async-errors": "^3.1.1",
     "fawn": "^2.1.5",
     "gitignore": "^0.6.0",
+    "helmet": "^3.22.0",
     "joi-objectid": "^3.0.1",
     "joi-password-complexity": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
+    "moment": "^2.26.0",
     "mongoose": "^5.9.12",
     "prettier": "^2.0.5",
     "winston": "^2.4.0",
@@ -30,7 +33,11 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "test": "jest --watchAll --runInBand"
+    "test": "jest --watchAll --runInBand",
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "12.16.1"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,4 @@
+const validator = require('../middleware/validate')
 const auth = require('../middleware/auth');
 const { Movie, validate } = require('../models/movie');
 const { Genre } = require('../models/genre');
@@ -9,19 +10,9 @@ router.get('/', async(req, res) => {
     res.send(movies);
 });
 
-// async function findGenre(id) {
-//     const genre = await Genre.findById(id);
-//     console.log(genre.name);
-// }
-
-// findGenre('5eb2655e697d3175101db5ef');
-
-router.post('/', auth, async(req, res) => {
-    const { error } = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
-
+router.post('/', [auth, validator(validate)], async(req, res) => {
     const genre = await Genre.findById(req.body.genreId);
-    console.log(genre.name);
+
     if (!genre) return res.status(400).send('Invalid genre.');
 
     const movie = new Movie({ 
@@ -39,12 +30,8 @@ router.post('/', auth, async(req, res) => {
     res.send(movie);
 });
 
-router.put('/:id', auth, async(req, res) => {
-    const { error } = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
-
+router.put('/:id', [auth, validator(validate)], async(req, res) => {
     const genre = await Genre.findById(req.body.genreId);
-    console.log(genre);
 
     if (!genre) return res.status(404).send('No genre with the given id was found');
 
